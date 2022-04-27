@@ -1,52 +1,73 @@
 let computerSelection = computerPlay();
 console.log(`Computer Chose: ${computerSelection}`);
-let playerSelection = "Rock";
-console.log(`Player Chose: ${playerSelection}`);
+let playerSelection = askPlayerWeapon();
+
+//  Prompt user for their weapon and validate selection
+function askPlayerWeapon() {
+    while (true) {
+        let askPlayer = prompt("Choose either Rock, Paper, or Scissors: ");
+
+        if (askPlayer.toLowerCase() == 'rock'
+        ||  askPlayer.toLowerCase() == 'paper'
+        ||  askPlayer.toLowerCase() == 'scissors') {
+            console.log(`Player ChoSe: ${askPlayer}`);
+            return askPlayer.toLowerCase();
+        }
+    }
+}
+
+console.log(`Player chose: ${playerSelection}`);
+
+
+
 console.log(playRPS(playerSelection, computerSelection));
 
+//  Computer chooses its weapon
 function computerPlay() {
     let randomPlay = Math.floor(Math.random() * 3) + 1;
-    console.log('randomPlay');
 
     if (randomPlay == 1) {
-        return 'Rock';
+        return 'ROCK';
     } else if (randomPlay == 2) {
-        return 'Paper';
+        return 'PAPER';
     }
-    return 'Scissors';
+    return 'SCISSORS';
 }
+
 function playRPS(playerSelection, computerSelection) {
-    if (playerSelection == 'Rock') {
+    if (playerSelection == 'rock') {
         switch (computerSelection) {
-            case 'Rock':
+            case 'ROCK':
                 return "Computer chose Rock... It's a tie!";
-            case 'Paper':
+            case 'PAPER':
                 return "Paper beats Rock... You lose!";
-            case 'Scissors':
+            case 'SCISSORS':
                 return "Rock beats Scissors... You win!";
             default:
                 return "Not sure what happened here..."
         }
-    } else if (playerSelection == 'Paper') {
+    } else if (playerSelection == 'paper') {
         switch (computerSelection) {
-            case 'Rock':
+            case 'ROCK':
                 return "Paper beats Rock... You win!";
-            case 'Paper':
+            case 'PAPER':
                 return "Computer chose Paper... It's a tie!";
-            case 'Scissors':
+            case 'SCISSORS':
                 return "Scissors beats Paper... You lose!";
             default:
                 return "Not sure what happened here...";
         }
-    } else {
+    } else if (playerSelection == 'scissors') {
         switch (computerSelection) {
-            case 'Rock':
+            case 'ROCK':
                 return "Rock beats Scissors... You lose!";
-            case 'Paper':
+            case 'PAPER':
                 return "Scissors beats Paper... You win!";
-            case 'Scissors':
+            case 'SCISSORS':
                 return "Computer chose Scissors... It's a tie!"
             default:
         }
+    } else {
+        return "Something went... wrong!";
     }
 }
