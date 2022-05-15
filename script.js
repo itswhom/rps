@@ -4,8 +4,7 @@ let playerWins = 0;
 let gameResult = '';
 
 //  Play the game() function!
-game();
-console.log(whoWon());
+
 
 //  Player chooses their weapon (in lowercase)
 function askPlayerWeapon() {

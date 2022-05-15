@@ -8,7 +8,85 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    Console RPS game. Check it out.
+    <div id="main">
+        <div id="choose-pane">
+            <div id="player-choose-weapon">
+                <div class="weapon">
+                    <p>R</p>
+                </div>
+                <div class="weapon">
+                    <p>P</p>
+                </div>
+                <div class="weapon">
+                    <p>S</p>
+                </div>
+                <div class="weapon">
+                    <p>L</p>
+                </div>
+                <div class="weapon">
+                    <p>V</p>
+                </div>
+            </div>
+            <div id="player-choose-text">
+                <h1>CHOOSE YOUR WEAPON</h1>
+            </div>
+        </div>
+        <div id="results-pane">
+            <div id="choices">
+                <div class="weapon-choice">
+                    <div id="you-chose-text">
+                        <h1>YOU CHOSE</h1>
+                    </div>
+                    <div id="you-chose-icon">
+                        <img src="#">
+                    </div>
+                </div>
+                <div id="running-score">
+                    <p>0 - 0</p>
+                </div>
+                <div class="weapon-choice">
+                    <div id="npc-chose-text">
+                        <h1>NPC CHOSE</h1>
+                    </div>
+                    <div id="npc-chose-icon">
+                        <img src="#">
+                    </div>
+                </div>
+            </div>
+            <div id="win-lose-text">
+                <h1>YOU WIN/LOSE</h1>
+            </div>
+        </div>
+        <div id="rules-modal" class="modal">
+            <div id="rules-text">
+                <h1>The rules</h1>
+                <p>Scissors cuts Paper</p>
+                <p>Paper covers Rock</p>
+                <p>Rock crushes Lizard</p>
+                <p>Lizard poisons Spock</p>
+                <p>Spock smashes Scissors</p>
+                <p>Scissors decapitates Lizard</p>
+                <p>Lizard eats Paper</p>
+                <p>Paper disproves Spock</p>
+                <p>Spock vaporizes Rock</p>
+                <p>Rock crushes Scissors</p>
+            </div>
+            <div class="close-button">✖</div>
+        </div>
+        <div id="about-modal" class="modal">
+            <div id="about-text">
+                <h1>About this game</h1>
+                <p>Created as a personal project as part of The Odin Project. <a href="#">View code on GitHub</a>.</p>
+                <p>Inspired by Rock, Paper, Scissors, Lizard, Spock, created by <a href="http://www.samkass.com/theories/RPSSL.html">Sam Kass</a> with Karen Bryla, made popular by the television show, The Big Bang Theory, S02E08, <em>The Lizard-Spock Expansion.</em></p>
+            </div>
+            <div class="close-button">✖</div>
+        </div>
+    </div>
+
+
+    <!--Game created by Sam Kass with Karen Bryla-->
+    <!---->
+
 </body>
 <script src="script.js"></script>
 </html>
