@@ -86,29 +86,37 @@ a:visited {
 }
 
 .weapon {
+    border: 0px;
     height: 175px;
-    width: 175px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
+    cursor: pointer;
 }
 
 .weapon-image {
-    height: 135px;
-    width: 135px;
+    border: 0px;
+    height: 100%;
+    width: auto;
     align-self: center;
 }
 
 .weapon img {
+    border: 0px;
     height: 100%;
     width: 100%;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
 
 .weapon p {
+    border: 0px;
     text-align: center;
     background-color: var(--blue);
-    color: var(--white)
+    color: var(--white);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
 }
 
 #modal-container {
@@ -121,6 +129,7 @@ a:visited {
 }
 
 #choose-pane {
+    border: 0px;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -134,6 +143,7 @@ a:visited {
 }
 
 #player-choose-weapon {
+    border: 0px;
     display: flex;
     flex-direction: row;
     width: 950px;
