@@ -8,55 +8,63 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="main">
-        <div id="choose-pane">
-            <div id="player-choose-weapon">
-                <div class="weapon">
-                    <p>R</p>
-                </div>
-                <div class="weapon">
-                    <p>P</p>
-                </div>
-                <div class="weapon">
-                    <p>S</p>
-                </div>
-                <div class="weapon">
-                    <p>L</p>
-                </div>
-                <div class="weapon">
-                    <p>V</p>
-                </div>
+    <div id="choose-pane">
+        <div id="hero">
+            <h1>Rock, Paper, Scissors, Lizard, Spock</h1>
+        </div>
+        <div id="player-choose-text">
+            <h1>Choose your weapon</h1>
+        </div>
+        <div id="player-choose-weapon">
+            <div class="weapon">
+                <div class="weapon-image"><img src="images/rock.png"></div>
+                <p>Rock</p>
             </div>
-            <div id="player-choose-text">
-                <h1>CHOOSE YOUR WEAPON</h1>
+            <div class="weapon">
+                <div class="weapon-image"><img src="images/paper.png"></div>
+                <p>Paper</p>
+            </div>
+            <div class="weapon">
+                <div class="weapon-image"><img src="images/scissors.png"></div>
+                <p>Scissors</p>
+            </div>
+            <div class="weapon">
+                <div class="weapon-image"><img src="images/lizard.png"></div>
+                <p>Lizard</p>
+            </div>
+            <div class="weapon">
+                <div class="weapon-image"><img src="images/spock.png"></div>
+                <p>Spock</p>
             </div>
         </div>
-        <div id="results-pane">
-            <div id="choices">
-                <div class="weapon-choice">
-                    <div id="you-chose-text">
-                        <h1>YOU CHOSE</h1>
-                    </div>
-                    <div id="you-chose-icon">
-                        <img src="#">
-                    </div>
+    </div>
+    <div id="results-pane">
+        <div id="choices">
+            <div class="weapon-choice">
+                <div id="you-chose-text">
+                    <h1>YOU CHOSE</h1>
                 </div>
-                <div id="running-score">
-                    <p>0 - 0</p>
-                </div>
-                <div class="weapon-choice">
-                    <div id="npc-chose-text">
-                        <h1>NPC CHOSE</h1>
-                    </div>
-                    <div id="npc-chose-icon">
-                        <img src="#">
-                    </div>
+                <div id="you-chose-icon">
+                    <img src="#">
                 </div>
             </div>
-            <div id="win-lose-text">
-                <h1>YOU WIN/LOSE</h1>
+            <div id="running-score">
+                <p>0 - 0</p>
+            </div>
+            <div class="weapon-choice">
+                <div id="npc-chose-text">
+                    <h1>NPC CHOSE</h1>
+                </div>
+                <div id="npc-chose-icon">
+                    <img src="#">
+                </div>
             </div>
         </div>
+        <div id="win-lose-text">
+            <h1>YOU WIN/LOSE</h1>
+        </div>
+    </div>
+    <div id="modal-container">
         <div id="rules-modal" class="modal">
             <div id="rules-text">
                 <h1>The rules</h1>
