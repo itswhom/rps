@@ -36,6 +36,20 @@ p {
     font-size: 24px;
 }
 
+a {
+    color: var(--red);
+    text-decoration: none;
+    border: 0;
+}
+
+a:hover {
+    color: var(--nude);
+}
+
+a:visited {
+    color: var(--red);
+}
+
 .close-button {
     color: var(--black);
     border: 0px;
@@ -61,6 +75,16 @@ p {
     background-color: var(--red);
 }
 
+.modal {
+    border: 0px;
+    box-shadow: 2px 4px 16px var(--black);
+    display: none;
+    justify-content: space;
+    border-radius: 16px;
+    width: 500px;
+    padding: 10px;
+}
+
 #main {
     border: 0px;
     display: flex;
@@ -79,14 +103,7 @@ p {
 }
 
 #rules-modal {
-    border: 0px;
-    box-shadow: 2px 4px 16px var(--black);
-    display: flex;
-    justify-content: space;
-    border-radius: 16px;
-    width: 500px;
     text-align: center;
-    padding: 10px;
 }
 
 #rules-text {
@@ -96,15 +113,36 @@ p {
 }
 
 #rules-text p {
-    margin: 5px 0px;
+    margin: 10px 0px;
     border: 0px;
 }
 
 #rules-text h1 {
     border: 0px;
+    text-decoration: underline;
 }
 
+#about-modal {
+    display: flex;
+    width: 500px;
+}
 
-#about-pane {
-    display: none;
+#about-modal h1 {
+    text-align: center;
+    text-decoration: underline;
+    border: 0px;
+}
+
+#about-text {
+    margin-left: 30px;
+    border: 0px;
+}
+
+#about-text p {
+    margin: 20px 0px;
+    border: 0px;
+}
+
+#about-text em {
+    border: 0;
 }
