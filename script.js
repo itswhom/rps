@@ -1,47 +1,61 @@
-
 let computerWins = 0;
 let playerWins = 0;
-let gameResult = '';
+const choosePane = document.getElementById("choose-pane");
+const resultsPane = document.getElementById("results-pane");
+const rulesModal = document.getElementById("rules-modal");
+const aboutModal = document.getElementById("about-modal");
+let openPane = choosePane; // which pane to go back to when closing modals
 
-//  Play the game() function!
+//  OUTCOMES array of 2-dimensional weapon combos
+//  T: Tie; P: Player Win; N: NPC Win
+//  OUTCOMES[][] calls down then out, index 0
+const OUTCOMES = [
+    ["T", "P", "N", "N", "P"],
+    ["N", "T", "P", "P", "N"],
+    ["P", "N", "T", "N", "P"],
+    ["P", "N", "P", "T", "N"],
+    ["N", "P", "N", "P", "T"]
+];
+
+//  Player chooses their weapon
+/*  event listener on each weapon button
+    Each one runs playGame(clickedButton) or something
+    */
 
 
-//  Player chooses their weapon (in lowercase)
-function askPlayerWeapon() {
-    while (true) {
-        let askPlayer = prompt("Choose either Rock, Paper, or Scissors: ");
+//  Play RPS
+function playGame(playerSelection) {
+    let npcSelection = npcChoice();
+    let currentResult = OUTCOMES[npcSelection][playerSelection];
+    openPane = resultsPane;
+    resultsPane.style.display = 'flex';
+    choosePane.style.display = 'none';
+    
+    if (currentResult == "T") { // it's a tie
+        console.log(`npc chose: ${npcSelection}`);
+        console.log(`player chose: ${playerSelection}`);
+        console.log("It's a tie!");
 
-        if (askPlayer.toLowerCase() == 'rock'
-        ||  askPlayer.toLowerCase() == 'paper'
-        ||  askPlayer.toLowerCase() == 'scissors') {
-            /* console.log(`Player ChoSe: ${askPlayer}`); */
-            return askPlayer.toLowerCase();
-        }
+    } else if (currentResult == "N") { // npc wins
+        console.log(`npc chose: ${npcSelection}`);
+        console.log(`player chose: ${playerSelection}`);
+        console.log("NPC wins!");
+    } else { // player wins
+        console.log(`npc chose: ${npcSelection}`);
+        console.log(`player chose: ${playerSelection}`);
+        console.log("Player wins!");
     }
-}
 
-//  Play RPS until five games have been played, then report winner/loser/tie
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = askPlayerWeapon();
-            console.log(`Player chose: ${playerSelection}`);
-        let computerSelection = computerPlay();
-            console.log(`Computer Chose: ${computerSelection}`);
+/*
+    if (gameResult == "p") {
+        playerWins ++;
+    } else if (gameResult == "c") {
+        computerWins ++;
+    }*/
 
-
-            console.log(playRPS(playerSelection, computerSelection));
-            //console.log(gameResult);
-
-        if (gameResult == "p") {
-            playerWins ++;
-        } else if (gameResult == "c") {
-            computerWins ++;
-        }
-
-        /* if (playerWins == 3 || computerWins == 3) {
-            return;
-        } */
-    }
+    /* if (playerWins == 3 || computerWins == 3) {
+        return;
+    } */
 }
 
 //  Determine who won after scores are finalized
@@ -55,20 +69,38 @@ function whoWon() {
     }
 }
 
-//  Computer chooses its weapon (IN CAPS)
-function computerPlay() {
-    let randomPlay = Math.floor(Math.random() * 3) + 1;
-
-    if (randomPlay == 1) {
-        return 'ROCK';
-    } else if (randomPlay == 2) {
-        return 'PAPER';
-    }
-    return 'SCISSORS';
+function npcChoice() {
+    //  NPC chooses its weapon:
+    //  0: Rock; 1: Paper; 2: Scissors; 3: Lizard; 4: Spock
+    return Math.floor(Math.random() * 5);
 }
 
+function rulesModalOpen() {
+    rulesModal.style.display = 'flex';
+    openPane.style.display = 'none';
+}
+
+function rulesModalClose() {
+    rulesModal.style.display = 'none';
+    openPane.style.display = 'flex';
+}
+
+function aboutModalOpen() {
+    aboutModal.style.display = 'flex';
+    openPane.style.display = 'none';
+}
+
+function aboutModalClose() {
+    aboutModal.style.display = 'none';
+    openPane.style.display = 'flex';
+}
+
+function nextRound() {
+    resultsPane.style.display = 'none';
+    choosePane.style.display = 'flex';
+}
 //  Play a single game of RPS
-function playRPS(playerSelection, computerSelection) {
+/*function playRPS(playerSelection, computerSelection) {
     if (playerSelection == 'rock') {
         switch (computerSelection) {
             case 'ROCK':
@@ -114,3 +146,4 @@ function playRPS(playerSelection, computerSelection) {
         return "Something went... wrong!";
     }
 }
+*/
