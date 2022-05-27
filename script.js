@@ -4,6 +4,13 @@ const choosePane = document.getElementById("choose-pane");
 const resultsPane = document.getElementById("results-pane");
 const rulesModal = document.getElementById("rules-modal");
 const aboutModal = document.getElementById("about-modal");
+let youChose = document.getElementById("you-chose-icon");
+let npcChose = document.getElementById("npc-chose-icon");
+let winLoseText = document.getElementById("win-lose-text");
+let runningScore = document.getElementById("running-score");
+let nextButton = document.getElementById("next-round-container");
+let playerScore = 0;
+let npcScore = 0;
 let openPane = choosePane; // which pane to go back to when closing modals
 
 //  OUTCOMES array of 2-dimensional weapon combos
@@ -32,30 +39,30 @@ function playGame(playerSelection) {
     choosePane.style.display = 'none';
     
     if (currentResult == "T") { // it's a tie
-        console.log(`npc chose: ${npcSelection}`);
-        console.log(`player chose: ${playerSelection}`);
-        console.log("It's a tie!");
-
+        resultsImages(playerSelection,npcSelection);
+        winLoseText.innerText = "It's a tie!";
     } else if (currentResult == "N") { // npc wins
-        console.log(`npc chose: ${npcSelection}`);
-        console.log(`player chose: ${playerSelection}`);
-        console.log("NPC wins!");
+        resultsImages(playerSelection,npcSelection);
+        winLoseText.innerText = "Computer win!";
+        npcScore ++;
     } else { // player wins
-        console.log(`npc chose: ${npcSelection}`);
-        console.log(`player chose: ${playerSelection}`);
-        console.log("Player wins!");
+        resultsImages(playerSelection,npcSelection);
+        winLoseText.innerText = "Player win!";
+        playerScore ++;
     }
 
-/*
-    if (gameResult == "p") {
-        playerWins ++;
-    } else if (gameResult == "c") {
-        computerWins ++;
-    }*/
-
-    /* if (playerWins == 3 || computerWins == 3) {
-        return;
-    } */
+    runningScore.innerText = `${playerScore} - ${npcScore}`;
+    if (playerScore > 4 || npcScore > 4) {
+        //  win conditions
+        if (playerScore > npcScore) {
+            winLoseText.innerHTML = `<h1 class="win-text">YOU BESTED THE `
+                +   `COMPUTER!<br/>Play again?</h1>`;
+        } else {
+            winLoseText.innerHTML = `<h1 class="lose-text">THE COMPUTER `
+                +   `BESTED YOU!<br/>Play again?</h1>`;
+        }
+        nextButton.innerHTML = `<button onclick="newGame()">New Game</button>`;
+    }
 }
 
 //  Determine who won after scores are finalized
@@ -78,6 +85,7 @@ function npcChoice() {
 function rulesModalOpen() {
     rulesModal.style.display = 'flex';
     openPane.style.display = 'none';
+    aboutModal.style.display = 'none';
 }
 
 function rulesModalClose() {
@@ -88,6 +96,7 @@ function rulesModalClose() {
 function aboutModalOpen() {
     aboutModal.style.display = 'flex';
     openPane.style.display = 'none';
+    rulesModal.style.display = 'none';
 }
 
 function aboutModalClose() {
@@ -98,7 +107,41 @@ function aboutModalClose() {
 function nextRound() {
     resultsPane.style.display = 'none';
     choosePane.style.display = 'flex';
+    openPane = choosePane;
 }
+
+function newGame() {
+    resultsPane.style.display = 'none';
+    choosePane.style.display = 'flex';
+    openPane = choosePane;
+    npcScore = 0;
+    playerScore = 0;
+    nextButton.innerHTML = `<button onclick="nextRound()">Next Round</button>`;
+}
+
+function resultsImages(playerSelection, npcSelection) {
+    youChose.innerHTML = `<img src="${choiceToImage(playerSelection)}">`;
+    npcChose.innerHTML = `<img src="${choiceToImage(npcSelection)}">`;
+}
+
+function choiceToImage (theChoice) {
+    switch (theChoice) {
+        case 0:
+            return "images/rock.png";
+        case 1:
+            return "images/paper.png";
+        case 2:
+            return "images/scissors.png";
+        case 3:
+            return "images/lizard.png";
+        case 4:
+            return "images/spock.png";
+        default:
+            return "image conversion error";
+    }
+}
+
+
 //  Play a single game of RPS
 /*function playRPS(playerSelection, computerSelection) {
     if (playerSelection == 'rock') {
