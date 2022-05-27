@@ -8,63 +8,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="choose-pane">
-        <div id="hero">
-            <h1>Rock, Paper, Scissors, Lizard, Spock</h1>
-        </div>
-        <div id="player-choose-text">
-            <h1>Choose your weapon</h1>
-        </div>
-        <div id="player-choose-weapon">
-            <div class="weapon">
-                <div class="weapon-image"><img src="images/rock.png"></div>
-                <p>Rock</p>
-            </div>
-            <div class="weapon">
-                <div class="weapon-image"><img src="images/paper.png"></div>
-                <p>Paper</p>
-            </div>
-            <div class="weapon">
-                <div class="weapon-image"><img src="images/scissors.png"></div>
-                <p>Scissors</p>
-            </div>
-            <div class="weapon">
-                <div class="weapon-image"><img src="images/lizard.png"></div>
-                <p>Lizard</p>
-            </div>
-            <div class="weapon">
-                <div class="weapon-image"><img src="images/spock.png"></div>
-                <p>Spock</p>
-            </div>
+    <div id="topnav">
+        <div id="navcontainer">
+            <button onclick="rulesModalOpen()">Rules</button>
+            <button onclick="aboutModalOpen()">About</button>
         </div>
     </div>
-    <div id="results-pane">
-        <div id="choices">
-            <div class="weapon-choice">
-                <div id="you-chose-text">
-                    <h1>YOU CHOSE</h1>
-                </div>
-                <div id="you-chose-icon">
-                    <img src="#">
-                </div>
-            </div>
-            <div id="running-score">
-                <p>0 - 0</p>
-            </div>
-            <div class="weapon-choice">
-                <div id="npc-chose-text">
-                    <h1>NPC CHOSE</h1>
-                </div>
-                <div id="npc-chose-icon">
-                    <img src="#">
-                </div>
-            </div>
-        </div>
-        <div id="win-lose-text">
-            <h1>YOU WIN/LOSE</h1>
-        </div>
-    </div>
-    <div id="modal-container">
+    <!-- DIFFERENT MODALS -->
+    <!--<div id="modal-container">-->
         <div id="rules-modal" class="modal">
             <div id="rules-text">
                 <h1>The rules</h1>
@@ -79,7 +30,7 @@
                 <p>Spock vaporizes Rock</p>
                 <p>Rock crushes Scissors</p>
             </div>
-            <div class="close-button">✖</div>
+            <div class="close-button" onclick="rulesModalClose()">✖</div>
         </div>
         <div id="about-modal" class="modal">
             <div id="about-text">
@@ -87,13 +38,70 @@
                 <p>Created as a personal project as part of The Odin Project. <a href="#">View code on GitHub</a>.</p>
                 <p>Inspired by Rock, Paper, Scissors, Lizard, Spock, created by <a href="http://www.samkass.com/theories/RPSSL.html">Sam Kass</a> with Karen Bryla, made popular by the television show, The Big Bang Theory, S02E08, <em>The Lizard-Spock Expansion.</em></p>
             </div>
-            <div class="close-button">✖</div>
+            <div class="close-button" onclick="aboutModalClose()">✖</div>
         </div>
+    <!--</div>-->
+    <!-- PLAYER CHOOSING THEIR WEAPON -->
+    <div id="choose-pane">
+        <div id="hero">
+            <h1>Rock, Paper, Scissors, Lizard, Spock</h1>
+        </div>
+        <div id="player-choose-text">
+            <h1>Choose your weapon</h1>
+        </div>
+        <div id="player-choose-weapon">
+            <div class="weapon" id="pickRock" onclick="playGame(0)">
+                <div class="weapon-image"><img src="images/rock.png"></div>
+                <p>Rock</p>
+            </div>
+            <div class="weapon" id="pickPaper" onclick="playGame(1)">
+                <div class="weapon-image"><img src="images/paper.png"></div>
+                <p>Paper</p>
+            </div>
+            <div class="weapon" id="pickScissors" onclick="playGame(2)">
+                <div class="weapon-image"><img src="images/scissors.png"></div>
+                <p>Scissors</p>
+            </div>
+            <div class="weapon" id="pickLizard" onclick="playGame(3)">
+                <div class="weapon-image"><img src="images/lizard.png"></div>
+                <p>Lizard</p>
+            </div>
+            <div class="weapon" id="pickSpock" onclick="playGame(4)">
+                <div class="weapon-image"><img src="images/spock.png"></div>
+                <p>Spock</p>
+            </div>
+        </div>
+        <div class="spacer"></div>
     </div>
-
-
-    <!--Game created by Sam Kass with Karen Bryla-->
-    <!---->
+    <!-- RESULTS OF THE LAST SELECTION -->
+    <div id="results-pane">
+        <div id="choices">
+            <div class="weapon-choice">
+                <div id="you-chose-text">
+                    <h1>YOU CHOSE</h1>
+                </div>
+                <div id="you-chose-icon">
+                </div>
+            </div>
+            <div id="scoreboard">
+                <p id="running-score">0 - 0</p>
+            </div>
+            <div class="weapon-choice">
+                <div id="npc-chose-text">
+                    <h1>NPC CHOSE</h1>
+                </div>
+                <div id="npc-chose-icon">
+                </div>
+            </div>
+        </div>
+        <div id="win-lose">
+            <h1 id="win-lose-text"><!--WHO WON GOES HERE--></h1>
+        </div>
+        <div id="next-round-container">
+            <button onclick="nextRound()">Next Round</button>
+        </div>
+        <div class="spacer"></div>
+    </div>
 
 </body>
 <script src="script.js"></script>

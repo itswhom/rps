@@ -1,46 +1,67 @@
-
 let computerWins = 0;
 let playerWins = 0;
-let gameResult = '';
+const choosePane = document.getElementById("choose-pane");
+const resultsPane = document.getElementById("results-pane");
+const rulesModal = document.getElementById("rules-modal");
+const aboutModal = document.getElementById("about-modal");
+let youChose = document.getElementById("you-chose-icon");
+let npcChose = document.getElementById("npc-chose-icon");
+let winLoseText = document.getElementById("win-lose-text");
+let runningScore = document.getElementById("running-score");
+let nextButton = document.getElementById("next-round-container");
+let playerScore = 0;
+let npcScore = 0;
+let openPane = choosePane; // which pane to go back to when closing modals
 
-//  Play the game() function!
+//  OUTCOMES array of 2-dimensional weapon combos
+//  T: Tie; P: Player Win; N: NPC Win
+//  OUTCOMES[][] calls down then out, index 0
+const OUTCOMES = [
+    ["T", "P", "N", "N", "P"],
+    ["N", "T", "P", "P", "N"],
+    ["P", "N", "T", "N", "P"],
+    ["P", "N", "P", "T", "N"],
+    ["N", "P", "N", "P", "T"]
+];
+
+//  Player chooses their weapon
+/*  event listener on each weapon button
+    Each one runs playGame(clickedButton) or something
+    */
 
 
-//  Player chooses their weapon (in lowercase)
-function askPlayerWeapon() {
-    while (true) {
-        let askPlayer = prompt("Choose either Rock, Paper, or Scissors: ");
-
-        if (askPlayer.toLowerCase() == 'rock'
-        ||  askPlayer.toLowerCase() == 'paper'
-        ||  askPlayer.toLowerCase() == 'scissors') {
-            /* console.log(`Player ChoSe: ${askPlayer}`); */
-            return askPlayer.toLowerCase();
-        }
+//  Play RPS
+function playGame(playerSelection) {
+    let npcSelection = npcChoice();
+    let currentResult = OUTCOMES[npcSelection][playerSelection];
+    openPane = resultsPane;
+    resultsPane.style.display = 'flex';
+    choosePane.style.display = 'none';
+    
+    if (currentResult == "T") { // it's a tie
+        resultsImages(playerSelection,npcSelection);
+        winLoseText.innerText = "It's a tie!";
+    } else if (currentResult == "N") { // npc wins
+        resultsImages(playerSelection,npcSelection);
+        winLoseText.innerText = "Computer win!";
+        npcScore ++;
+    } else { // player wins
+        resultsImages(playerSelection,npcSelection);
+        winLoseText.innerText = "Player win!";
+        playerScore ++;
     }
-}
 
-//  Play RPS until five games have been played, then report winner/loser/tie
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = askPlayerWeapon();
-            console.log(`Player chose: ${playerSelection}`);
-        let computerSelection = computerPlay();
-            console.log(`Computer Chose: ${computerSelection}`);
-
-
-            console.log(playRPS(playerSelection, computerSelection));
-            //console.log(gameResult);
-
-        if (gameResult == "p") {
-            playerWins ++;
-        } else if (gameResult == "c") {
-            computerWins ++;
+    runningScore.innerText = `${playerScore} - ${npcScore}`;
+    if (playerScore > 4 || npcScore > 4) {
+        //  win conditions
+        if (playerScore > npcScore) {
+            winLoseText.innerHTML = `<h1 class="win-text">YOU BESTED THE `
+                +   `COMPUTER!<br/>Play again?</h1>`;
+        } else {
+            winLoseText.innerHTML = `<h1 class="lose-text">THE COMPUTER `
+                +   `BESTED YOU!<br/>Play again?</h1>`;
         }
-
-        /* if (playerWins == 3 || computerWins == 3) {
-            return;
-        } */
+        nextButton.innerHTML = `<button onclick="newGame()">New Game</button>`;
     }
 }
 
@@ -55,20 +76,74 @@ function whoWon() {
     }
 }
 
-//  Computer chooses its weapon (IN CAPS)
-function computerPlay() {
-    let randomPlay = Math.floor(Math.random() * 3) + 1;
-
-    if (randomPlay == 1) {
-        return 'ROCK';
-    } else if (randomPlay == 2) {
-        return 'PAPER';
-    }
-    return 'SCISSORS';
+function npcChoice() {
+    //  NPC chooses its weapon:
+    //  0: Rock; 1: Paper; 2: Scissors; 3: Lizard; 4: Spock
+    return Math.floor(Math.random() * 5);
 }
 
+function rulesModalOpen() {
+    rulesModal.style.display = 'flex';
+    openPane.style.display = 'none';
+    aboutModal.style.display = 'none';
+}
+
+function rulesModalClose() {
+    rulesModal.style.display = 'none';
+    openPane.style.display = 'flex';
+}
+
+function aboutModalOpen() {
+    aboutModal.style.display = 'flex';
+    openPane.style.display = 'none';
+    rulesModal.style.display = 'none';
+}
+
+function aboutModalClose() {
+    aboutModal.style.display = 'none';
+    openPane.style.display = 'flex';
+}
+
+function nextRound() {
+    resultsPane.style.display = 'none';
+    choosePane.style.display = 'flex';
+    openPane = choosePane;
+}
+
+function newGame() {
+    resultsPane.style.display = 'none';
+    choosePane.style.display = 'flex';
+    openPane = choosePane;
+    npcScore = 0;
+    playerScore = 0;
+    nextButton.innerHTML = `<button onclick="nextRound()">Next Round</button>`;
+}
+
+function resultsImages(playerSelection, npcSelection) {
+    youChose.innerHTML = `<img src="${choiceToImage(playerSelection)}">`;
+    npcChose.innerHTML = `<img src="${choiceToImage(npcSelection)}">`;
+}
+
+function choiceToImage (theChoice) {
+    switch (theChoice) {
+        case 0:
+            return "images/rock.png";
+        case 1:
+            return "images/paper.png";
+        case 2:
+            return "images/scissors.png";
+        case 3:
+            return "images/lizard.png";
+        case 4:
+            return "images/spock.png";
+        default:
+            return "image conversion error";
+    }
+}
+
+
 //  Play a single game of RPS
-function playRPS(playerSelection, computerSelection) {
+/*function playRPS(playerSelection, computerSelection) {
     if (playerSelection == 'rock') {
         switch (computerSelection) {
             case 'ROCK':
@@ -114,3 +189,4 @@ function playRPS(playerSelection, computerSelection) {
         return "Something went... wrong!";
     }
 }
+*/
